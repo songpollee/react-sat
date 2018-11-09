@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
+import { map } from 'lodash/fp';
 import Title from '../components/Title';
 import Item from '../components/Item';
+import Button from '../components/Button';
 
 class TodoPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: 'Todo App',
+      items: ['Item', 'Item'],
+    };
+    this.onClickAddButton = this.onClickAddButton.bind(this);
+  }
+
+  onClickAddButton() {
+    const items = this.state.items;
+    this.setState((state) => ({ items: [...items, 'item'] }));
+  }
+
   render() {
     return (
       <div className="TodoPage">
-        <Title>Todo App</Title>
-        <Item>Item's Todo1</Item>
-        <Item>Item's Todo2</Item>
+        <Title>{this.state.title}</Title>
+        {map((item) => (<Item>{item}</Item>))(this.state.items)}
+        <Button onClick={this.onClickAddButton}>add</Button>
       </div>
     );
   }
