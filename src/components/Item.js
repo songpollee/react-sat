@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose, lifecycle, pure } from 'recompose';
 import './Item.css';
 
 const Item = ({ children }) => (
@@ -7,4 +8,14 @@ const Item = ({ children }) => (
   </div>
 );
 
-export default Item;
+export default compose(
+  pure,
+  lifecycle({
+    componentDidMount() {
+      console.log('componentDidMount Item');
+    },
+    componentDidUpdate() {
+      console.log('componentDidUpdate Item');
+    },
+  }),
+)(Item);

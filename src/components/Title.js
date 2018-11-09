@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose, lifecycle, pure } from 'recompose';
 import './Title.css';
 
 const Title = ({ children }) => (
@@ -7,4 +8,14 @@ const Title = ({ children }) => (
   </div>
 );
 
-export default Title;
+export default compose(
+  pure,
+  lifecycle({
+    componentDidMount() {
+      console.log('componentDidMount Title');
+    },
+    componentDidUpdate() {
+      console.log('componentDidUpdate Title');
+    },
+  }),
+)(Title);

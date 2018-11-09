@@ -1,6 +1,6 @@
 import React from 'react';
 import { map } from 'lodash/fp';
-import { compose, withState, withHandlers } from 'recompose';
+import { compose, withState, withHandlers, lifecycle } from 'recompose';
 import Title from '../components/Title';
 import Item from '../components/Item';
 import Button from '../components/Button';
@@ -19,6 +19,14 @@ export default compose(
   withHandlers({
     onClickAddButton: ({ items, setItems }) => () => {
       setItems([...items, 'item']);
+    },
+  }),
+  lifecycle({
+    componentDidMount() {
+      console.log('componentDidMount TodoPage');
+    },
+    componentDidUpdate() {
+      console.log('componentDidUpdate TodoPage');
     },
   }),
 )(TodoPage);
