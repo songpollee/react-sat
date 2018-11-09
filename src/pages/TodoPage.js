@@ -8,10 +8,18 @@ class TodoPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Todo App',
+      title: 'Hello React',
       items: ['Item', 'Item'],
     };
     this.onClickAddButton = this.onClickAddButton.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount todoPage');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdte todoPage');
   }
 
   onClickAddButton() {
