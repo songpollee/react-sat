@@ -5,7 +5,7 @@ class Title extends Component {
   render() {
     return (
       <div className="Title">
-        Todo app
+        {this.props.children}
       </div>
     );
   }
