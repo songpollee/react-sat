@@ -2,8 +2,8 @@ import React from 'react';
 import { compose, lifecycle, pure } from 'recompose';
 import './Button.css';
 
-const Button = ({children, onClick}) => (
-  <button className="Button" onClick={onClick}>
+const Button = ({ children, onClick, ...otherProps }) => (
+  <button className="Button" onClick={onClick} {...otherProps}>
     {children}
   </button>
 );
