@@ -1,26 +1,34 @@
 import React from 'react';
-import { map } from 'lodash/fp';
-import { compose, withState, withHandlers, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
+import { map, get, toPairs } from 'lodash/fp';
+import { compose, withState, lifecycle } from 'recompose';
 import Title from '../components/Title';
 import Item from '../components/Item';
 import Button from '../components/Button';
+import { addTodo } from '../actions/todoAction';
 
 const TodoPage = ({ title, items, onClickAddButton}) => (
   <div className="TodoPage">
     <Title>{title}</Title>
-    {map((item) => (<Item>{item}</Item>))(items)}
+    {compose(
+      map(([key, item]) => (<Item key={key}>{item}</Item>)),
+      toPairs,
+    )(items)}
     <Button onClick={onClickAddButton}>add</Button>
   </div>
 );
 
+const mapStateToProps = (state) => ({
+  items: get(['todo'])(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onClickAddButton: () => dispatch(addTodo('item')),
+});
+
 export default compose(
   withState('title', 'setTitle', 'Hello React'),
-  withState('items', 'setItems', ['item', 'item']),
-  withHandlers({
-    onClickAddButton: ({ items, setItems }) => () => {
-      setItems([...items, 'item']);
-    },
-  }),
+  connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
       console.log('componentDidMount TodoPage');
