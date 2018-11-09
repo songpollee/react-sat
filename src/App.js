@@ -1,10 +1,13 @@
 import React from 'react';
-import TodoPage from './pages/TodoPage';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from './AppRouter';
 import './App.css';
 
 const App = () => (
   <div>
-    <TodoPage />
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   </div>
 );
 
